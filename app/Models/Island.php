@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Island extends Model
 {
@@ -20,4 +21,10 @@ class Island extends Model
         'name',
         'atoll',
     ];
+
+
+
+    public function addresses() {
+        return $this->hasMany(Address::class);
+    }
 }

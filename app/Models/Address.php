@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Address extends Model
 {
@@ -15,7 +17,15 @@ class Address extends Model
 
     protected $fillable = [
         'name',
-        
+        'island_id',
     ];
+
+    public function patients() {
+        return $this->hasMany(Patient::class);
+    }
+
+    public function island() {
+        return $this->belongsTo(Island::class);
+    }
 
 }
