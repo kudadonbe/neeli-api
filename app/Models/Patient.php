@@ -18,7 +18,6 @@ class Patient extends Model
         'national_id',
         'name',
         'dob',
-        'address',
         ];
 
 }
