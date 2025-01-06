@@ -11,7 +11,7 @@ class UpdatePatientRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -21,8 +21,22 @@ class UpdatePatientRequest extends FormRequest
      */
     public function rules(): array
     {
+        $method = $this->getMethod();
+        
+        if ($method === 'PUT') {
+            return [
+                'name' => 'required',
+                'dob' => 'required',
+                'national_id' => 'required',
+                'address_id' => 'required',
+            ];
+        }
+        
         return [
-            //
+            'name' => ['sometimes','required'],
+            'dob' => ['sometimes','required'],
+            'national_id' => ['sometimes','required'],
+            'address_id' => ['sometimes','required'],
         ];
     }
 }

@@ -11,7 +11,7 @@ class StorePatientRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,18 @@ class StorePatientRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'name' => 'required',
+            'dob' => 'required',
+            'national_id' => 'required',
+            'address_id' => 'required',
         ];
     }
+
+    // uncoment if needed
+    // protected function prepareForValidation(): void
+    // {
+    //     $this->merge([
+    //         'address_id' => $this->address_id
+    //     ]);
+    // }
 }

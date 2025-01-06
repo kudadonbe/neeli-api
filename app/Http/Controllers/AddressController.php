@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreAddressRequest;
 use App\Http\Requests\UpdateAddressRequest;
 use App\Models\Address;
-use Illuminate\Http\Request;
 
 class AddressController extends Controller
 {
@@ -20,13 +19,9 @@ class AddressController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreAddressRequest $request)
     {
-        $fields = $request->validate([
-            'name' => 'required',
-            'island_id' => 'required',
-        ]);
-        $address = Address::create($fields);
+        $address = Address::create($request->all());
         return $address;
     }
 
@@ -42,15 +37,9 @@ class AddressController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Address $address)
+    public function update(UpdateAddressRequest $request, Address $address)
     {
-        $fields = $request->validate([
-            'name' => 'required',
-            'island_id' => 'required',
-        ]);
-
-        $address->update($fields);
-
+        $address->update($request->all());
         return $address;
     }
 
@@ -59,7 +48,8 @@ class AddressController extends Controller
      */
     public function destroy(Address $address)
     {
+        $house = $address->name;
         $address->delete();
-        return ['message' => 'Address deleted'];
+        return ['message' => $house . ' deleted'];
     }
 }

@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreIslandRequest;
 use App\Http\Requests\UpdateIslandRequest;
 use App\Models\Island;
-use Illuminate\Http\Request;
 
 class IslandController extends Controller
 {
@@ -21,14 +20,9 @@ class IslandController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreIslandRequest $request)
     {
-        
-        $feilds = $request->validate([
-            'name' => 'required',
-            'atoll' => 'required',
-        ]);
-        $island = Island::create($feilds);
+        $island = Island::create($request->all());
         return $island;
     }
 
@@ -44,15 +38,10 @@ class IslandController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Island $island)
+    public function update(UpdateIslandRequest $request, Island $island)
     {
-        $feilds = $request->validate([
-            'name' => 'required',
-            'atoll' => 'required',
-        ]);
-
-        $island->update($feilds);
-
+        $island->update($request->all());
+        
         return $island;
     }
 

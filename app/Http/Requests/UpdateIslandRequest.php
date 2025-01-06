@@ -11,7 +11,7 @@ class UpdateIslandRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -21,8 +21,18 @@ class UpdateIslandRequest extends FormRequest
      */
     public function rules(): array
     {
+        $method = $this->getMethod();
+        if ($method === 'PUT') {
+            return [
+                'name' => 'required',
+                'atoll' => 'required',
+            ];
+        }
+        
         return [
-            //
+            'name' => ['sometimes', 'required'],
+            'atoll' => ['sometimes', 'required'],
         ];
+       
     }
 }

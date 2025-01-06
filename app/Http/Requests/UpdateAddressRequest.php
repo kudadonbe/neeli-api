@@ -11,7 +11,7 @@ class UpdateAddressRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -21,8 +21,18 @@ class UpdateAddressRequest extends FormRequest
      */
     public function rules(): array
     {
+        $method = $this->getMethod();
+        
+        if ($method === 'PUT') {
+            return [
+                'name' => 'required',
+                'island_id' => 'required',
+            ];
+        }
+
         return [
-            //
+            'name' => ['sometimes', 'required'],
+            'island_id' => ['sometimes', 'required'],
         ];
     }
 }
