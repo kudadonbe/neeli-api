@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreIslandRequest;
 use App\Http\Requests\UpdateIslandRequest;
+use App\Http\Resources\IslandResource;
+use App\Http\Resources\IslandCollection;
 use App\Models\Island;
 
 class IslandController extends Controller
@@ -14,7 +16,7 @@ class IslandController extends Controller
     public function index()
     {
         //
-        return Island::all();
+        return new IslandCollection(Island::all());
     }
 
     /**
@@ -32,7 +34,7 @@ class IslandController extends Controller
     public function show(Island $island)
     {
         //
-        return $island;
+        return new IslandResource($island);
     }
 
     /**

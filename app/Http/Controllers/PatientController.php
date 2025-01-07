@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StorePatientRequest;
 use App\Http\Requests\UpdatePatientRequest;
+use App\Http\Resources\PatientCollection;
+use App\Http\Resources\PatientResource;
 use App\Models\Patient;
 
 
@@ -14,7 +16,8 @@ class PatientController extends Controller
      */
     public function index()
     {
-        return Patient::all();
+
+        return new PatientCollection(Patient::all());
     }
 
     /**
@@ -32,7 +35,7 @@ class PatientController extends Controller
      */
     public function show(Patient $patient)
     {
-        return $patient;
+        return new PatientResource($patient);
     }
 
     /**

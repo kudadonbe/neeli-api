@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreAddressRequest;
 use App\Http\Requests\UpdateAddressRequest;
+use App\Http\Resources\AddressResource;
+use App\Http\Resources\AddressCollection;
 use App\Models\Address;
 
 class AddressController extends Controller
@@ -13,7 +15,7 @@ class AddressController extends Controller
      */
     public function index()
     {
-        return Address::all();
+        return new AddressCollection(Address::all());
     }
 
     /**
@@ -31,7 +33,7 @@ class AddressController extends Controller
     public function show(Address $address)
     {
         //
-        return $address;
+        return new AddressResource($address);
     }
 
     /**
