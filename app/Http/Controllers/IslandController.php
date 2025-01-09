@@ -16,6 +16,8 @@ class IslandController extends Controller
     public function index()
     {
         //
+        // $islandswithAdd = Island::with('addresses')->get();
+
         return new IslandCollection(Island::all());
     }
 
@@ -33,7 +35,8 @@ class IslandController extends Controller
      */
     public function show(Island $island)
     {
-        //
+        
+        $island->load('addresses');
         return new IslandResource($island);
     }
 

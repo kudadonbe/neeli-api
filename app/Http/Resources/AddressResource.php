@@ -17,8 +17,8 @@ class AddressResource extends JsonResource
         $island = $this->island->atoll . ' ' . $this->island->name;
         $address = [
             'id' => $this->id,
-            'name' => $this->name,
-            'island' => $island,
+            'house' => $this->name,
+            'island_id' =>$this->island_id
         ];
         return $address;
     }

@@ -15,14 +15,19 @@ class PatientResource extends JsonResource
     public function toArray(Request $request): array
     {
 
-        $address = $this->address->name . ', ' . $this->address->island->atoll . ' ' . $this->address->island->name;
-
+        $island = $this->address->island->atoll . ' ' . $this->address->island->name;
+        
         $patientInfo = [
             'id' => $this->id,
-            'nid' => $this->national_id,
             'name' => $this->name,
             'dob' => $this->dob,
-            'address' => $address,
+            'national_id' => $this->national_id,
+            'address' => [
+                'id' => $this->address->id,
+                'house' => $this->address->name,
+                'island' => $island
+            ]
+
         ];
         return $patientInfo;
     }

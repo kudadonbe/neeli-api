@@ -4,6 +4,10 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
+use App\Http\Resources\AddressResource;
+use App\Models\Address;
+
+
 
 class IslandResource extends JsonResource
 {
@@ -14,10 +18,12 @@ class IslandResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        $name = $this->atoll . ' ' . $this->name;
         $island = [
-            'id'=> $this->id,
-            'name' => $name,
+            'id' => $this->id,
+            'atoll' => $this->atoll,
+            'name' => $this->name,
+            'addresses' => AddressResource::collection($this->whenLoaded('addresses')),
+            
         ];
         return $island;
     }
